@@ -21,24 +21,24 @@ class Layout extends React.Component {
         });
     }
 
-    render(){
+    render() {
         return (
-        <div className={classes.Layout}>
+            <div className={classes.Layout}>
 
-            <Drawer
-                isOpen={this.state.menu}
-                onClose={this.menuCloseHandler}
-            />
+                <Drawer
+                    isOpen={this.state.menu}
+                    onClose={this.menuCloseHandler}
+                />
 
-            <MenuToggle
-                onToggle={this.toggleMenuHandler}
-                isOpen={this.state.menu}
-            />
+                <MenuToggle
+                    isOpen={this.state.menu}
+                    onToggle={this.toggleMenuHandler}
+                />
 
-            <main>
-                {this.props.children}
-            </main>
-        </div>
+                <main>
+                    {this.props.children}
+                </main>
+            </div>
         )
     }
 }
