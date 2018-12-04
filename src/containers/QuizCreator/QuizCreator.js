@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import classes from './QuizCreator.module.css'
 import Button from '../../components/UI/Button/Button'
-import {createControl} from '../../form/FormFramework'
+import {createControl, validate} from '../../form/FormFramework'
 import Input from '../../components/UI/Input/Input'
 import Select from '../../components/UI/Select/Select'
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
@@ -48,7 +48,12 @@ export default class QuizCreator extends Component {
     }
 
     changeHandler = (value, controlName) => {
+        const formControls = {...this.state.formControls};
+        const control = {...formControls[controlName]}
 
+        control.touched = true;
+        control.value = value;
+        control.valid = va
     }
 
     renderControls() {
@@ -75,7 +80,6 @@ export default class QuizCreator extends Component {
     }
 
     selectChangeHandler = event => {
-        console.log(event.target.value)
 
         this.setState({
             rightAnswerId: event.target.value
