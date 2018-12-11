@@ -18,8 +18,7 @@ const composeEnhancers =
 
 const store = createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(thunk))
-);
+    composeEnhancers(applyMiddleware(thunk)));
 
 const app = (
     <Provider store={store}>

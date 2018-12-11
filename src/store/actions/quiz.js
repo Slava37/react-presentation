@@ -3,12 +3,12 @@ import {FETCH_QUIZES_START, FETCH_QUIZES_SUCCESS, FETCH_QUIZES_ERROR} from "./ac
 
 export function fetchQuizes() {
     return async dispatch => {
-        dispatch(fetchQuizesStart())
+        dispatch(fetchQuizesStart());
 
         try {
             const response = await axios.get('/quises.json');
 
-            const quizes = []
+            const quizes = [];
 
             Object.keys(response.data).forEach((key, index) => {
                 quizes.push({
@@ -19,10 +19,6 @@ export function fetchQuizes() {
 
             dispatch(fetchQuizesSuccess(quizes))
 
-            this.setState({
-                quizes,
-                loading: false
-            })
         } catch (e) {
             dispatch(fetchQuizesError(e))
         }
@@ -37,12 +33,14 @@ export function fetchQuizesStart() {
 
 export function fetchQuizesSuccess(quizes) {
     return {
-        type: FETCH_QUIZES_SUCCESS
+        type: FETCH_QUIZES_SUCCESS,
+        quizes
     }
 }
 
 export function fetchQuizesError(e) {
     return {
-        type: FETCH_QUIZES_ERROR
+        type: FETCH_QUIZES_ERROR,
+        error: e
     }
 }

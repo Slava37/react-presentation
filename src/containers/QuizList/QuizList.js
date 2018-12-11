@@ -8,7 +8,7 @@ import {fetchQuizes} from "../../store/actions/quiz";
 class QuizList extends Component {
 
     renderQuizes() {
-        return this.this.props.quizes.map((quiz) => {
+        return this.props.quizes.map((quiz) => {
             return (
                 <li
                     key={quiz.id}
@@ -30,7 +30,6 @@ class QuizList extends Component {
             <div className={classes.QuizList}>
                 <div>
                     <h1>Список тестов</h1>
-
                     {
                         this.props.loading && this.props.quizes.length !== 0
                             ? <Loader />
@@ -47,7 +46,7 @@ class QuizList extends Component {
 function mapStateToProps(state) {
     return {
         quizes: state.quiz.quizes,
-        loading: state.state.loading
+        loading: state.quiz.loading
     }
 }
 
