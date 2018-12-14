@@ -6,7 +6,7 @@ import AnswersList from './AnswersList/AnswersList';
     <div className={classes.ActiveQuiz}>
         <p className={classes.Question}>
             <span>
-                <strong>2.</strong>&nbsp;
+                <strong>{props.answerNumber}.</strong>&nbsp;
                 {props.question}
             </span>
 

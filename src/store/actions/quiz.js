@@ -3,7 +3,7 @@ import {
     FETCH_QUIZES_START,
     FETCH_QUIZES_SUCCESS,
     FETCH_QUIZES_ERROR,
-    FETCH_QUIZ_SUCCESS, QUIZ_SET_STATE, FINISH_QUIZ
+    FETCH_QUIZ_SUCCESS, QUIZ_SET_STATE, FINISH_QUIZ, QUIZ_NEXT_QUESTION, QUIZ_RETRY
 } from "./actionTypes";
 
 export function quizAnswerClick(answerId) {
@@ -21,7 +21,7 @@ export function quizAnswerClick(answerId) {
         const question = state.quiz[state.activeQuestion];
         const results = state.results;
 
-        if (question.rightAnswerId === answerId) {
+        if (question.rightAnswerId == answerId) {
             if (!results[question.id]) {
                 results[question.id] = 'success'
             }
@@ -29,13 +29,10 @@ export function quizAnswerClick(answerId) {
             dispatch(quizSetState({[answerId]: 'success'}, results));
 
             const timeout = window.setTimeout(() => {
-                if (this.isQuizFinished()) {
+                if (isQuizFinished(state)) {
                     dispatch(finishQuiz())
                 } else {
-                    // this.setState({
-                    //     activeQuestion: state.activeQuestion + 1,
-                    //     answerState: null
-                    // });
+                    dispatch(quizNextQuestion(state.activeQuestion + 1))
                 }
 
                 window.clearTimeout(timeout);
@@ -46,6 +43,23 @@ export function quizAnswerClick(answerId) {
             results[question.id] = 'error';
             dispatch(quizSetState({[answerId]: 'error'}, results));
         }
+    }
+}
+
+function isQuizFinished(state) {
+    return state.activeQuestion + 1 === state.quiz.length;
+}
+
+export function retryQuiz() {
+    return {
+        type: QUIZ_RETRY
+    }
+}
+
+export function quizNextQuestion(number) {
+    return {
+        type: QUIZ_NEXT_QUESTION,
+        number: number
     }
 }
 
