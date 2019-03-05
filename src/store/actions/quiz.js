@@ -9,11 +9,11 @@ import {
 export function quizAnswerClick(answerId) {
     return (dispatch, getState) => {
 
-        const state = getState().quiz
+        const state = getState().quiz;
 
         if (state.answerState) {
             const key = Object.keys(state.answerState)[0];
-            if (state.answerState[key] === 'success') {
+            if (state.answerState[key] == 'success') {
                 return;
             }
         }
