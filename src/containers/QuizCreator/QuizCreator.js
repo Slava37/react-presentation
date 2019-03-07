@@ -17,8 +17,13 @@ function createOptionControl(number) {
     }, {required: true})
 }
 
-function createFormControls() {
+function createFormControls(quizName) {
     return {
+        quizName: createControl({
+            label: 'Введите название теста',
+            errorMessage: 'Название теста не может быть пустым',
+            value: quizName
+        }, {required: true}),
         question: createControl({
             label: 'Введите вопрос',
             errorMessage: 'Вопрос не может быть пустым'
@@ -35,7 +40,7 @@ class QuizCreator extends Component {
     state = {
         rightAnswerId: 1,
         isFormValid: false,
-        formControls: createFormControls()
+        formControls: createFormControls("")
     }
 
     onSubmitHandler = (evt) => {
@@ -43,9 +48,9 @@ class QuizCreator extends Component {
     }
 
     addQuestionHandler = (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
-        const {question, option1, option2, option3, option4} = this.state.formControls;
+        const {quizName, question, option1, option2, option3, option4} = this.state.formControls;
 
         const questionItem = {
             question: question.value,
@@ -57,25 +62,28 @@ class QuizCreator extends Component {
                 {text: option3.value, id: option3.id},
                 {text: option4.value, id: option4.id},
             ]
-        }
+        };
 
-        this.props.createQuizQuestion(questionItem);
+        this.props.createQuizQuestion(questionItem, quizName.value);
+
+        let newQuizName = this.props.quizName;
 
         this.setState({
             rightAnswerId: 1,
             isFormValid: false,
-            formControls: createFormControls()
+            formControls: createFormControls(quizName.value)
         })
     }
 
     createQuizHandler = (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         this.setState({
             rightAnswerId: 1,
             isFormValid: false,
-            formControls: createFormControls()
+            formControls: createFormControls("")
         });
+
         this.props.finishCreateQuiz()
 
 
@@ -170,13 +178,14 @@ class QuizCreator extends Component {
 
 function mapStateToProps(state) {
     return {
-        quiz: state.create.quiz
+        quiz: state.create.quiz,
+        quizName: state.create.quizName
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        createQuizQuestion: item => dispatch(createQuizQuestion(item)),
+        createQuizQuestion: (item, quizName) => dispatch(createQuizQuestion(item, quizName)),
         finishCreateQuiz: () => dispatch(finishCreateQuiz())
     }
 }

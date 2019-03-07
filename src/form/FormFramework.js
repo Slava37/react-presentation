@@ -1,10 +1,10 @@
-export function createControl(config, validation) {
+export function createControl(config, validation, value = "") {
     return {
         ...config,
         validation,
         valid: !validation,
         touched: false,
-        value: ''
+        value: value
     }
 }
 
