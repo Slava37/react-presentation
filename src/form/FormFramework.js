@@ -13,6 +13,10 @@ export function validate(value, validation = null) {
         return true;
     }
 
+    if(!value){
+        return false;
+    }
+
     let isValid = true;
 
     if (validation.required) {

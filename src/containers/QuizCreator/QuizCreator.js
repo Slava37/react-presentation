@@ -17,13 +17,8 @@ function createOptionControl(number) {
     }, {required: true})
 }
 
-function createFormControls(quizName) {
+function createFormControls() {
     return {
-        quizName: createControl({
-            label: 'Введите название теста',
-            errorMessage: 'Название теста не может быть пустым',
-            value: quizName
-        }, {required: true}),
         question: createControl({
             label: 'Введите вопрос',
             errorMessage: 'Вопрос не может быть пустым'
@@ -40,7 +35,15 @@ class QuizCreator extends Component {
     state = {
         rightAnswerId: 1,
         isFormValid: false,
-        formControls: createFormControls("")
+        formControls: {
+            quizNameControl: createControl({
+                label: 'Введите название теста',
+                errorMessage: 'Название теста не может быть пустым',
+                value: "",
+            }, {required: true}),
+            ...createFormControls()
+
+        }
     }
 
     onSubmitHandler = (evt) => {
@@ -50,7 +53,7 @@ class QuizCreator extends Component {
     addQuestionHandler = (event) => {
         event.preventDefault();
 
-        const {quizName, question, option1, option2, option3, option4} = this.state.formControls;
+        const {quizNameControl, question, option1, option2, option3, option4} = this.state.formControls;
 
         const questionItem = {
             question: question.value,
@@ -64,14 +67,15 @@ class QuizCreator extends Component {
             ]
         };
 
-        this.props.createQuizQuestion(questionItem, quizName.value);
+        this.props.createQuizQuestion(questionItem, quizNameControl.value);
+        let curFormControls = this.state.formControls;
 
-        let newQuizName = this.props.quizName;
 
         this.setState({
+            ...this.state,
             rightAnswerId: 1,
             isFormValid: false,
-            formControls: createFormControls(quizName.value)
+            formControls: {...curFormControls, ...createFormControls()}
         })
     }
 
@@ -81,7 +85,7 @@ class QuizCreator extends Component {
         this.setState({
             rightAnswerId: 1,
             isFormValid: false,
-            formControls: createFormControls("")
+            formControls: createFormControls()
         });
 
         this.props.finishCreateQuiz()
@@ -103,7 +107,8 @@ class QuizCreator extends Component {
             formControls,
             isFormValid: validateForm(formControls)
         });
-    }
+    };
+
 
     renderControls() {
         return Object.keys(this.state.formControls).map((controlName, index) => {
