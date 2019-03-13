@@ -1,3 +1,4 @@
+
 import axios from "../../axios/axios-quiz";
 import {
     FETCH_QUIZES_START,
@@ -13,7 +14,7 @@ export function quizAnswerClick(answerId) {
 
         if (state.answerState) {
             const key = Object.keys(state.answerState)[0];
-            if (state.answerState[key] == 'success') {
+            if (state.answerState[key] === 'success') {
                 return;
             }
         }
@@ -21,7 +22,7 @@ export function quizAnswerClick(answerId) {
         const question = state.quiz[state.activeQuestion];
         const results = state.results;
 
-        if (question.rightAnswerId == answerId) {
+        if (Number(question.rightAnswerId) === answerId) {
             if (!results[question.id]) {
                 results[question.id] = 'success'
             }

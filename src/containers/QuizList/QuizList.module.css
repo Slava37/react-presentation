@@ -4,7 +4,7 @@
     padding-top: 100px;
     flex-grow: 1;
     width: 100%;
-    background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f79cbd 100%);
+    background: linear-gradient(45deg, #232a51 0%, #606dbc 100%)
 }
 
 .QuizList h1 {

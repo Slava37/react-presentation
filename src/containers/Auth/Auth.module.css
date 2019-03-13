@@ -4,7 +4,7 @@
     padding-top: 100px;
     flex-grow: 1;
     width: 100%;
-    background: linear-gradient(270deg, #cef2fa 0%, #59bfef 100%);
+    background: linear-gradient(45deg, #232a51 0%, #606dbc 100%)
 }
 
 .Auth > div {

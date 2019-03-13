@@ -7,10 +7,10 @@
     max-width: 300px;
     padding: 20px 10px;
     box-sizing: border-box;
-    background: #fff;
     transform: translateX(0px);
     transition: transform .22s ease-in;
     z-index: 90;
+    background: linear-gradient(45deg, #606dbc 0%, #606dbc 50%, #465298 50%, #465298 100%);
 }
 
 .Drawer.close{
@@ -28,10 +28,10 @@ Drawer ul li {
 }
 
 .Drawer ul li a {
-    color: #363d54;
+    color:  #606dbc;
+    filter: brightness(150%);
     font-size: 30px;
     text-decoration: none;
-    background-color: #fff;
     position: relative;
     padding: 0 20px 10px 20px;
     transition: opacity .3s;
