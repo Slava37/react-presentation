@@ -10,7 +10,7 @@
     transform: translateX(0px);
     transition: transform .22s ease-in;
     z-index: 90;
-    background: linear-gradient(45deg, #606dbc 0%, #606dbc 50%, #465298 50%, #465298 100%);
+    background: linear-gradient(45deg, #606dbc 0%, #606dbc 40%, #465298 40%, #465298 100%);
 }
 
 .Drawer.close{
